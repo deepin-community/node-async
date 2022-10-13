@@ -1,0 +1,53 @@
+#!/usr/bin/make -f
+# -*- mode: makefile; coding: utf-8 -*-
+# Copyright 2011-2014, 2018  Jonas Smedegaard <dr@jones.dk>
+# Description: Main Debian packaging script for async
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+%:
+	dh $@
+
+include /usr/share/dpkg/pkg-info.mk
+lib = $(patsubst node-%,%,$(DEB_SOURCE))
+pkg-js = libjs-$(lib)
+pkg-node = node-$(lib)
+js-basedir = lib/
+js-plain = $(wildcard $(js-basedir)*.js)
+js-minified = $(patsubst $(js-basedir)%.js,debian/%.min.js,$(js-plain))
+js-destdir = /usr/share/javascript/$(lib)
+node-destdir = /usr/lib/nodejs/$(lib)
+
+override_dh_installdocs:
+	dh_installdocs --all README.md
+
+override_dh_install:
+	dh_install -p$(pkg-js) $(js-plain) $(js-minified) $(js-destdir)
+	dh_install -p$(pkg-node) package.json $(node-destdir)
+override_dh_link:
+	dh_link -p$(pkg-node) $(js-destdir)/$(lib).js $(node-destdir)/index.js
+	dh_link -p$(pkg-node) $(js-destdir)/$(lib).js $(node-destdir)/index.js
+
+override_dh_auto_build: $(js-minified)
+debian/%.min.js: $(js-basedir)%.js
+	uglifyjs -o $@ $<
+override_dh_auto_test:
+	nodeunit test
+override_dh_auto_clean:
+	rm -f $(js-minified)
+
+# Unset executable bit on library files
+override_dh_fixperms:
+	dh_fixperms
+	chmod -x debian/$(pkg-js)$(js-destdir)/*
