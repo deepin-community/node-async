@@ -1,1 +1,2 @@
-.pc/
+/node_modules
+/dist
