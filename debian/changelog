@@ -1,3 +1,20 @@
+node-async (0.8.0-6) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Apply multi-arch hints. + node-async: Add Multi-Arch: foreign.
+
+ -- Jelmer Vernooĳ <jelmer@debian.org>  Mon, 21 Nov 2022 10:06:48 +0000
+
+node-async (0.8.0-5) unstable; urgency=medium
+
+  * Team upload
+  * Update standards version to 4.6.0, no changes needed
+  * Drop nodejs dependency
+  * Mark test dependencies with <!nocheck>
+  * Use dh-sequence-nodejs auto test & install
+
+ -- Yadd <yadd@debian.org>  Thu, 20 Jan 2022 09:13:47 +0100
+
 node-async (0.8.0-4) unstable; urgency=medium
 
   * Team upload
