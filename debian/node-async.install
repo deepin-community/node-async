@@ -1,1 +1,2 @@
-usr/share/nodejs
+build/* usr/share/nodejs/async
+build-es/* usr/share/nodejs/async-es

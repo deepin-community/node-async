@@ -5,46 +5,50 @@ Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.deb
 Uploaders: Jonas Smedegaard <dr@jones.dk>
 Build-Depends: debhelper-compat (= 13)
  , dh-sequence-nodejs
- , nodeunit <!nocheck>
- , uglifyjs
-Standards-Version: 4.6.0
+ , node-babel-core
+ , node-babel-minify
+ , node-babel-plugin-add-module-exports
+ , node-babel-plugin-transform-modules-commonjs
+ , node-rollup-plugin-node-resolve
+ , rollup
+ , node-istanbul (>= 0.4.5+repack10+~cs98.25.59-3) <!nocheck>
+ , mocha <!nocheck>
+ , chai <!nocheck>
+ , node-bluebird <!nocheck>
+ , node-es6-promise <!nocheck>
+ , node-native-promise-only <!nocheck>
+ , node-rsvp <!nocheck>
+ , node-lodash <!nocheck>
+Standards-Version: 4.7.0
 Vcs-Browser: https://salsa.debian.org/js-team/node-async
 Vcs-Git: https://salsa.debian.org/js-team/node-async.git
 Homepage: https://github.com/caolan/async
 Testsuite: autopkgtest-pkg-nodejs
 Rules-Requires-Root: no
 
-Package: libjs-async
-Architecture: all
-Depends: ${misc:Depends}
-Recommends: javascript-common
-Multi-Arch: foreign
-Description: functions and patterns for asynchronous code - web browsers
- Async is a utility module which provides straight-forward, powerful
- functions for working with asynchronous Javascript.
- .
- Async provides around 20 functions that include the usual 'functional'
- suspects (map, reduce, filter, forEach…) as well as some common
- patterns for asynchronous control flow (parallel, series, waterfall…).
- All these functions assume you follow the Node convention of providing
- a single callback as the last argument of your async function.
- .
- This provides async for use directly in web browsers.
-
 Package: node-async
 Architecture: all
 Depends: ${misc:Depends}
- , libjs-async
+Provides: node-async-es (= ${binary:Version})
+Conflicts: libjs-async
+Replaces: libjs-async
 Multi-Arch: foreign
 Description: functions and patterns for asynchronous code - Node.js
  Async is a utility module which provides straight-forward, powerful
  functions for working with asynchronous Javascript.
  .
- Async provides around 20 functions that include the usual 'functional'
- suspects (map, reduce, filter, forEach…) as well as some common
- patterns for asynchronous control flow (parallel, series, waterfall…).
+ Async provides around 70 functions that include the usual 'functional'
+ suspects (map, reduce, filter, each, ...) as well as some common
+ patterns for asynchronous control flow (parallel, series, waterfall, ...).
  All these functions assume you follow the Node convention of providing
  a single callback as the last argument of your async function.
  .
- This provides async for use with Node.js -
- an event-based server-side JavaScript engine.
+ Although originally designed for use with Node.js, this package can
+ also be used directly in the browser.  An ESM/MJS version is included
+ in this package that should automatically be used with compatible
+ bundlers such as Webpack and Rollup.
+ .
+ A pure ESM version of Async is also available as the async-es, included in
+ this Debian package.
+ .
+ Node.js is an event-based server-side JavaScript engine.

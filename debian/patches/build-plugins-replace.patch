@@ -1,0 +1,58 @@
+Description: Use more modern versions of babel and rollup for building package
+Forwarded: https://github.com/caolan/async/issues/1992
+Author: Julian Gilbey <jdg@debian.org>
+
+--- a/support/build/compile-module.js
++++ b/support/build/compile-module.js
+@@ -2,9 +2,7 @@
+ 
+ const yargs = require('yargs');
+ const fs = require('fs');
+-const {transformFile} = require('babel-core');
+-const pluginCJS = require('babel-plugin-transform-es2015-modules-commonjs');
+-const pluginModuleExports = require('babel-plugin-add-module-exports');
++const {transformFile} = require('@babel/core');
+ 
+ compileModule(yargs.argv, (err) => {
+     if (err) throw err;
+@@ -13,8 +11,8 @@
+ function compileModule(options, callback) {
+     const {file, output} = options;
+     const plugins = [
+-        pluginModuleExports,
+-        pluginCJS
++        "babel-plugin-add-module-exports",
++        "@babel/plugin-transform-modules-commonjs"
+     ];
+ 
+     transformFile(file, {
+--- a/support/build/aggregate-bundle.js
++++ b/support/build/aggregate-bundle.js
+@@ -1,5 +1,5 @@
+ const {rollup} = require('rollup');
+-const nodeResolve = require('rollup-plugin-node-resolve');
++const nodeResolve = require('@rollup/plugin-node-resolve');
+ 
+ rollup({
+     input: 'build-es/index.js',
+--- a/support/build/aggregate-module.js
++++ b/support/build/aggregate-module.js
+@@ -1,5 +1,5 @@
+ const {rollup} = require('rollup');
+-const nodeResolve = require('rollup-plugin-node-resolve');
++const nodeResolve = require('@rollup/plugin-node-resolve');
+ 
+ rollup({
+     input: 'build-es/index.js',
+--- a/.babelrc
++++ b/.babelrc
+@@ -1,7 +1,7 @@
+ {
+   "plugins": [
+-    "transform-es2015-modules-commonjs",
+-    "syntax-async-generators"
++    "@babel/plugin-transform-modules-commonjs",
++    "@babel/plugin-syntax-async-generators"
+   ],
+   "env": {
+     "test": {

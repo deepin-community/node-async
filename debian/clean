@@ -1,1 +1,4 @@
-debian/*.min.js
+build/
+build-es/
+dist/
+localtest/

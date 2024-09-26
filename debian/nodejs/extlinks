@@ -1,0 +1,13 @@
+@babel/core
+@babel/plugin-transform-modules-commonjs
+@babel/plugin-syntax-async-generators
+babel-minify
+babel-plugin-add-module-exports
+@rollup/plugin-node-resolve
+bluebird test
+chai test
+es6-promise test
+istanbul test
+lodash test
+native-promise-only test
+rsvp test

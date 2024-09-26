@@ -1,1 +1,19 @@
-nodeunit test
+if [ -n "$AUTOPKGTEST_TMP" ]
+then
+    debian/tests/pkg-js/debianise-tests.sh autopkgtest
+else
+    debian/tests/pkg-js/debianise-tests.sh build
+fi
+
+# We skip one failing test on all architectures, and two slow tests that
+# timeout on slow architectures
+case $(dpkg --print-architecture) in
+    armel|riscv64)
+	skips='(should error when re-assigning event methods|should not be subject to ReDoS|forEachOfLimit no call stack size exceed error)'
+	;;
+    *)
+	skips='should error when re-assigning event methods'
+	;;
+esac
+
+NODE_ENV=debiantest mocha -i -g "$skips" localtest

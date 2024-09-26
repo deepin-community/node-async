@@ -1,3 +1,27 @@
+node-async (3.2.6+dfsg-2) unstable; urgency=medium
+
+  * Team upload
+  * Change "Breaks: libjs-async" to Conflicts
+  * Update package description to mention ESM/MJS and async-es package
+  * For tests, depend on compatible version of node-istanbul, and skip
+    slow tests on slow architectures
+
+ -- Julian Gilbey <jdg@debian.org>  Wed, 25 Sep 2024 19:59:12 +0100
+
+node-async (3.2.6+dfsg-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version
+  * Exclude minified files from upstream source, and unreproducible
+    documentation (as we don't have jsdoc in Debian yet, and we're not
+    making a documentation package).
+  * Update d/copyright file
+  * Remove libjs-async package; it has no reverse dependencies and is now
+    unnecessary
+  * Rewrite the majority of debian/* for new version
+
+ -- Julian Gilbey <jdg@debian.org>  Wed, 18 Sep 2024 09:05:49 +0100
+
 node-async (0.8.0-6) unstable; urgency=medium
 
   [ Debian Janitor ]

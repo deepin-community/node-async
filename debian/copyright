@@ -1,25 +1,50 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: async
 Upstream-Contact: https://github.com/caolan/async/issues
-Source: https://github.com/caolan/async/downloads
- git://github.com/caolan/async
+Source: https://github.com/caolan/async
+Files-Excluded:
+ dist/async.js
+ dist/async.min.js
+ docs/v2
+ docs/v3
+ support/jsdoc/theme/static/scripts/prettify
+Comment:
+ Excluded files: the prettify directory contains minified versions of the
+ prettify scripts, found in libjs-prettify.
+ .
+ We also exclude the generated async.js files and generated documentation.
+ The documentation was built using jsdoc, which is not currently in Debian
+ (there is an RFP #774565 for it).  We are not building a -doc package for
+ node-async, so this is not an issue.
 
 Files: *
-Copyright: 2010-2014, Caolan McMahon
+Copyright: 2010-2024, Caolan McMahon
 License: Expat
 
-Files: deps/nodeunit.js
-Copyright: 2009, Thomas Robinson <280north.com>
-  2010, Caolan McMahon
-License: Expat
+Files:
+  support/jsdoc/theme/*
+Copyright: 2014-2015 Nijiko Yonskai <nijikokun@gmail.com> and the
+  contributors to Minami
+  (https://github.com/Nijikokun/minami/graphs/contributors).
+  2011-2015 Michael Mathews <micmath@gmail.com> and the
+  contributors to JSDoc
+  (https://github.com/jsdoc3/jsdoc/graphs/contributors).
+License: Apache-2.0
+
+Files:
+  support/jsdoc/theme/static/fonts/*
+Copyright:
+  Micah Stupak micah@measureandfit.co
+  Marc Foley m.foley.88@gmail.com
+  Meir Sadan meirsadan@gmail.com
+License: Apache-2.0
+Comment:
+ These fonts were probably copied before Google moved to the SIL Open Font
+ License.
 
 Files: debian/*
 Copyright: 2011-2014,2016-2018, Jonas Smedegaard <dr@jones.dk>
-License-Grant:
- This program is free software; you can redistribute it and/or modify it
- under the terms of the GNU General Public License as published by the
- Free Software Foundation; either version 3, or (at your option) any
- later version.
+  2018- Debian JavaScript Maintainers
 License: GPL-3+
 
 License: Expat
@@ -43,4 +68,24 @@ License: Expat
  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 License: GPL-3+
-License-Reference: /usr/share/common-licenses/GPL-3
+ This program is free software; you can redistribute it and/or modify it
+ under the terms of the GNU General Public License as published by the
+ Free Software Foundation; either version 3, or (at your option) any
+ later version.
+Comment:
+ On Debian systems, the full text of the GNU General Public License
+ version 3 can be found in the file '/usr/share/common-licenses/GPL-3'.
+
+License: Apache-2.0
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+     http://www.apache.org/licenses/LICENSE-2.0
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+Comment:
+ On Debian systems, the full text of the Apache License Version 2.0
+ can be found in the file '/usr/share/common-licenses/Apache-2.0'.

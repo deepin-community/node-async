@@ -1,0 +1,4 @@
+make build-bundle
+# Allow for testing internal classes
+perl -i -pe 's/^(\s+Object.defineProperty\(exports)/\n    if (process.env.NODE_ENV === "debiantest") {\n        exports.Heap = Heap;\n        exports.DLL = DLL;\n    }\n\n$1/' build/dist/async.js
+make build-dist build-es build-config build-es-config
